@@ -3,6 +3,7 @@ package sql_API;
 import java.util.ArrayList;
 import java.util.Arrays; 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class sql_API_FAKE {
 	
@@ -211,23 +212,7 @@ public class sql_API_FAKE {
 	
 	//-----GOALS--------------------------------------------------------------------------
 	
-		/* TODO: 
-		 * 
-		 * Should we really have these all in one file? It would make more sense to have a class for each, 
-		 * so we could do stuff like: 
-		 * 
-		 * 		Goals goals = new Goals(data);
-		 * 		String name = goal.getName();
-		 * 
-		 * which would help readability and implementation? Could instantiate the classes with the data in the API constructor?
-		 * 
-		 * Also the git repository is just a zip file, if we upload the code instead it would be easier for version control
-		 * 
-		 * Also: a lot of this code will be very similar, might be best to consolidate it / create a template class?
-		 * 		For example: the logic behind get(), create(), edit(), delete() will be relatively similar for all tables
-		 * 					 and we can probably do this with generics / template classes. Not 100% sure though, but it would be
-		 * 					 worth considering.
-		 */
+		// See Goals.java
 	
 	//------------------------------------------------------------------------------------
 	//-----COMMENTS-----------------------------------------------------------------------
@@ -255,19 +240,46 @@ public class sql_API_FAKE {
 		System.out.println(usersGetEmail("u34"));
 		System.out.println(usersGetAccountStatus("u34"));
 		
-		// GOALS
-		System.out.println("\nGoals \n------------------------------");
+		// GOALS: Test getters
 		Goals goals = new Goals(GOALS);
-		System.out.println(goals.getName("s2345"));
-		System.out.println(goals.getDescription("s2345"));
-		System.out.println(goals.getAssignor("s2345"));
-		System.out.println(goals.getAssignee("s2345"));
-		System.out.println(goals.getStartDate("s2345"));
-		System.out.println(goals.getEndDate("s2345"));
-		//System.out.println(goals.getRemainingDate("s2345")); // Not implemented yet, see function
-		System.out.println(goals.getStatus("s2345"));
-		System.out.println(goals.getGrade("s2345"));
-		System.out.println(goals.getGoalID("s2345"));
+		
+//		System.out.println("\nGoals \n------------------------------");
+//		System.out.println(goals.getName("s2345"));
+//		System.out.println(goals.getDescription("s2345"));
+//		System.out.println(goals.getAssignor("s2345"));
+//		System.out.println(goals.getAssignee("s2345"));
+//		System.out.println(goals.getStartDate("s2345"));
+//		System.out.println(goals.getEndDate("s2345"));
+//		//System.out.println(goals.getRemainingDate("s2345")); // Not implemented yet, see function
+//		System.out.println(goals.getStatus("s2345"));
+//		System.out.println(goals.getGrade("s2345"));
+//		System.out.println(goals.getGoalID("s2345"));
+		
+		// GOALS: Test create, edit, delete
+		System.out.println("\nGoals \n------------------------------");
+		goals.create("Eat Dinner", "Make some pasta!", "p93495", "u1", "u2", "2019-10-10 09:05:45.000");
+		System.out.println(goals.getName("s0"));
+		System.out.println(goals.getDescription("s0"));
+		System.out.println(goals.getAssignor("s0"));
+		System.out.println(goals.getAssignee("s0"));
+		System.out.println(goals.getStartDate("s0"));
+		System.out.println(goals.getEndDate("s0"));
+		//System.out.println(goals.getRemainingDate("s0")); // Not implemented yet, see function
+		System.out.println(goals.getStatus("s0"));
+		System.out.println(goals.getGrade("s0"));
+		System.out.println(goals.getGoalID("s0"));
+		
+		// Edit
+		goals.edit("s0", "Eat Lunch", "", "", "", "", "", "", "");
+		System.out.println("\n"+goals.getName("s0"));
+		
+		// Delete
+		goals.delete("s0");
+		try {
+			System.out.println("\n"+goals.getName("s0"));
+		} catch (NoSuchElementException e) {
+			System.out.println("No goal by id 's0'");
+		}
 	}
 }
 

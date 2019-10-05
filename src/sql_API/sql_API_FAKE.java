@@ -240,46 +240,31 @@ public class sql_API_FAKE {
 		System.out.println(usersGetEmail("u34"));
 		System.out.println(usersGetAccountStatus("u34"));
 		
-		// GOALS: Test getters
-		Goals goals = new Goals(GOALS);
-		
-//		System.out.println("\nGoals \n------------------------------");
-//		System.out.println(goals.getName("s2345"));
-//		System.out.println(goals.getDescription("s2345"));
-//		System.out.println(goals.getAssignor("s2345"));
-//		System.out.println(goals.getAssignee("s2345"));
-//		System.out.println(goals.getStartDate("s2345"));
-//		System.out.println(goals.getEndDate("s2345"));
-//		//System.out.println(goals.getRemainingDate("s2345")); // Not implemented yet, see function
-//		System.out.println(goals.getStatus("s2345"));
-//		System.out.println(goals.getGrade("s2345"));
-//		System.out.println(goals.getGoalID("s2345"));
-		
 		// GOALS: Test create, edit, delete
 		System.out.println("\nGoals \n------------------------------");
-		goals.create("Eat Dinner", "Make some pasta!", "p93495", "u1", "u2", "2019-10-10 09:05:45.000");
-		System.out.println(goals.getName("s0"));
-		System.out.println(goals.getDescription("s0"));
-		System.out.println(goals.getAssignor("s0"));
-		System.out.println(goals.getAssignee("s0"));
-		System.out.println(goals.getStartDate("s0"));
-		System.out.println(goals.getEndDate("s0"));
-		//System.out.println(goals.getRemainingDate("s0")); // Not implemented yet, see function
-		System.out.println(goals.getStatus("s0"));
-		System.out.println(goals.getGrade("s0"));
-		System.out.println(goals.getGoalID("s0"));
+		String id = sql_API.Goals.generateGoalID();
+		sql_API.Goals.create(id, "Eat Dinner", "Make some pasta!", "p93495", "u1", "u2", "2019-10-10 09:05:45.000");
+		System.out.println(sql_API.Goals.getName(id));
+		System.out.println(sql_API.Goals.getDescription(id));
+		System.out.println(sql_API.Goals.getAssignor(id));
+		System.out.println(sql_API.Goals.getAssignee(id));
+		System.out.println(sql_API.Goals.getStartDate(id));
+		System.out.println(sql_API.Goals.getEndDate(id));
+	    System.out.println(sql_API.Goals.getRemainingDate(id)); // Not implemented yet, see function
+		System.out.println(sql_API.Goals.getStatus(id));
+		System.out.println(sql_API.Goals.getGrade(id));
+		System.out.println(sql_API.Goals.getGoalID(id));
 		
-		// Edit
-		goals.edit("s0", "Eat Lunch", "", "", "", "", "", "", "");
-		System.out.println("\n"+goals.getName("s0"));
+		// Edit 
+		sql_API.Goals.edit(id, "Eat Lunch", "", "", "", "");
+		System.out.println("\n"+sql_API.Goals.getName(id));
 		
 		// Delete
-		goals.delete("s0");
+		sql_API.Goals.delete(id);
 		try {
-			System.out.println("\n"+goals.getName("s0"));
+			System.out.println("\n"+sql_API.Goals.getName(id));
 		} catch (NoSuchElementException e) {
-			System.out.println("No goal by id 's0'");
+			System.out.println("No goal by the id " + id);
 		}
 	}
 }
-

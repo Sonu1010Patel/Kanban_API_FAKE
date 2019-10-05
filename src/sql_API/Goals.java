@@ -3,7 +3,6 @@ package sql_API;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import sql_API.sql_API_FAKE;
 
 /**
@@ -14,14 +13,12 @@ import sql_API.sql_API_FAKE;
  * TODO: Implement dates where needed and maybe clean up code with generics / template pattern?
  * 		 Also: for consistency between database and prototype decide whether to call it a "Goal" or a "Task"
  */
-final class Goals {
-	private List<String[]> GOALS;
-
-	Goals(List<String[]> GOALS) {
-		this.GOALS = GOALS;
-	}
+public class Goals {
+	private static List<String[]> GOALS = sql_API_FAKE.GOALS;
+ 
+	private Goals() { }
 	
-	private String[] get(String goalID) {
+	private static String[] get(String goalID) {
 		for (String[] goalList : GOALS) {
 			if (Arrays.deepToString(goalList).contains("[" + goalID + ",")) {
 				return goalList;
@@ -30,7 +27,7 @@ final class Goals {
 		throw new NoSuchElementException();
 	}
 	
-	private String get(String goalID, int index) {
+	private static String get(String goalID, int index) {
 		for (String[] goalList : GOALS) {
 			if (Arrays.deepToString(goalList).contains("[" + goalID + ",")) {
 				return goalList[index];
@@ -38,28 +35,37 @@ final class Goals {
 		}
 		throw new NoSuchElementException();
 	}
+	
+	// Maybe not the best way but I need a way of actually creating / accessing a goalID outside of hardcoding
+		public static String generateGoalID() {
+			int i = 0;
+			while (sql_API_FAKE.ifIDexists(GOALS, "s" + i)) {
+				i++;
+			}
+			return "s" + i;
+		}
 
-	public String getName(String goalID) {
+	public static String getName(String goalID) {
 		return get(goalID, 1);
 	}
 
-	public String getDescription(String goalID) {
+	public static String getDescription(String goalID) {
 		return get(goalID, 2);
 	}
 
-	public String getAssignor(String goalID) {
+	public static String getAssignor(String goalID) {
 		return get(goalID, 4);
 	}
 
-	public String getAssignee(String goalID) {
+	public static String getAssignee(String goalID) {
 		return get(goalID, 5);
 	}
 
-	public String getStartDate(String goalID) {
+	public static String getStartDate(String goalID) {
 		return get(goalID, 6);
 	}
 
-	public String getEndDate(String goalID) {
+	public static String getEndDate(String goalID) {
 		return get(goalID, 7);
 	}
 
@@ -71,31 +77,32 @@ final class Goals {
 	 * 
 	 * This is the more common way and it makes parsing easier when using java's date libraries
 	 */
-	public String getRemainingDate(String goalID) {
+	public static String getRemainingDate(String goalID) {
 		return "";
 	}
 
-	public String getStatus(String goalID) {
+	public static String getStatus(String goalID) {
 		return get(goalID, 8);
-	}
+	} 
 
-	public String getGrade(String goalID) {
+	public static String getGrade(String goalID) {
 		return get(goalID, 9);
 	}
 
-	public String getGoalID(String goalID) {
+	public static String getGoalID(String goalID) {
 		return getAssignee(goalID) + " / " + get(goalID, 3);
 	}
 
-	// TODO: Implement date
-	public void create(String name, String description, String projectID, String assignorID, 
+	/* TODO: Implement date
+	 * 
+	 * goal id creation, ifIDexists should be done outside of create() and used as parameter
+	 * so that there is a way to "know" the goalID and call the functions appropriately
+	 */
+	public static void create(String goalID, String name, String description, String projectID, String assignorID, 
 			String assigneeID, String endDate) {
+		
 		String[] newGoal = new String[10];
-		int i = 0;
-		while (sql_API_FAKE.ifIDexists(GOALS, "s" + i)) {
-			i++;
-		}
-		newGoal[0] = "s" + i;
+		newGoal[0] = goalID;
 		newGoal[1] = name;
 		newGoal[2] = description; 
 		newGoal[3] = projectID;
@@ -108,25 +115,14 @@ final class Goals {
 
 		GOALS.add(newGoal);
 	}
-
-	public void edit(String goalID, String name, String description, String projectID, String assignorID,
-			String assigneeID, String endDate, String status, String grade) {
+ 
+	public static void edit(String goalID, String name, String description, String endDate, String status, String grade) {
 		String[] goalList = get(goalID);
-
 		if (!name.isEmpty()) {
 			goalList[1] = name;
 		}
 		if (!description.isEmpty()) {
 			goalList[2] = description;
-		}
-		if (!projectID.isEmpty()) {
-			goalList[3] = projectID;
-		}
-		if (!assignorID.isEmpty()) {
-			goalList[4] = assignorID;
-		}
-		if (!assigneeID.isEmpty()) {
-			goalList[5] = assigneeID;
 		}
 		if (!endDate.isEmpty()) {
 			goalList[7] = endDate;
@@ -137,9 +133,9 @@ final class Goals {
 		if (!grade.isEmpty()) {
 			goalList[9] = grade;
 		}
-	}
+	} 
 
-	public void delete(String goalID) {
+	public static void delete(String goalID) {
 		GOALS.remove(get(goalID));
 	}
 }

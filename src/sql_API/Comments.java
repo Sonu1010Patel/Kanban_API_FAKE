@@ -62,7 +62,7 @@ final class Comments {
 		return meow;
 	}
 	
-	public static void create(String commentID, String commentText, String commentor, String parentID, string date){
+	public static void create(String commentID, String commentText, String commentor, String parentID, String date){
 		
 		String[] newComment = new String[5];
 		

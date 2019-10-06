@@ -58,7 +58,7 @@ final class Groups {
 		GROUPS.remove(get(groupID));
 	}
 	
-	public static void create(String groupID, String groupName, string creatorID){
+	public static void create(String groupID, String groupName, String creatorID){
 		
 		String[] newGroup = new String[3];
 		
@@ -69,7 +69,7 @@ final class Groups {
 		GROUPS.add(newGroup);
 	}
 	
-	public static void edit(String groupID, String groupName, string creatorID){
+	public static void edit(String groupID, String groupName, String creatorID){
 		String[] groupInfo = get(groupID);
 		if(groupName != null){
 			groupInfo[1] = groupName;

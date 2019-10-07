@@ -76,11 +76,14 @@ final class Comments {
 	}
 	
 	//doesn't really seem necessary to be able to update the commentor or the thing it is commented on...
-	public static void edit(String commentID, String commentText){
+	public static void edit(String commentID, String commentText, String time){
 		String[] commentInfo = get(commentID);
 		
 		if(commentText != null){
 			commentInfo[1] = commentText;
+		}
+		if(time != null) {
+			commentInfo[4] = time;
 		}
 	}
 	public static void delete(String commentID){

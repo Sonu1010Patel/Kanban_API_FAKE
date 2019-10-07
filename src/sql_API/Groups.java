@@ -41,20 +41,20 @@ final class Groups {
 	}
 	
 	
-	private static String getGroupName(String groupID){
+	public static String getGroupName(String groupID){
 		return get(groupID, 1);
 	}
 	
-	private static String getGroupOwner(String groupID){
+	public static String getGroupOwner(String groupID){
 		return get(groupID, 2);
 	}
 	
 	// TODO ?
-	private static String[] getAllGroups(){
+	public static String[] getAllGroups(){
 		return null;
 	}
 	
-	private static void deleteGroup(String groupID){
+	public static void deleteGroup(String groupID){
 		GROUPS.remove(get(groupID));
 	}
 	

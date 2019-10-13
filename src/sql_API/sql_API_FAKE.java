@@ -1,7 +1,13 @@
 package sql_API;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -53,44 +59,44 @@ public class sql_API_FAKE {
   static List<String[]> PROJECTS = new ArrayList<String[]>(Arrays.asList(PROJECTS1));
 
   static String[][] GOALS1 = {
-      {"GoalD", "Goal Name", "Goal Description", "ProjectID", "AssignorID", "AssigneeID",
-          "start date", "end date", "Goal Status", "Goal Grade"},
-      {"s2345", "Goal1", "Do Subgoal", "p93495", "u1", "u2", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s12", "Goal2", "Do Another Subgoal", "p93495", "u1", "u1", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "COMPLETED", "A-"},
-      {"s24535", "Goal3", "And Another One", "p93495", "u1", "u6", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s95843", "Goal4", "And More", "p93495", "u1", "u2", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
-      {"s3463", "Goal5", "Second TO Last", "p93495", "", "", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
-      {"s59205", "Goal6", "Final Subgoal", "p93495", "u1", "u1", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s2003", "Goal1", "Do Subgoal", "p34852", "u100", "u100", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s24053", "Goal2", "Do Another Subgoal", "p34852", "u100", "u856", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "COMPLETED", "TBD"},
-      {"s73253", "Goal3", "And Another One", "p34852", "u100", "u856", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s25253", "Goal4", "And More", "p34852", "u100", "u456", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s02850", "Goal5", "Second TO Last", "p34852", "u100", "u856", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
-      {"s201", "Goal6", "Final Subgoal", "p34852", "u100", "u100", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s24642", "Goal1", "Do Subgoal", "p234", "u9545", "u5496", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
-      {"s5039", "Goal2", "Do Another Subgoal", "p234", "u9545", "u5496", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s345", "Goal3", "And Another One", "p234", "u9545", "u9545", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "COMPLETED", "B+"},
-      {"s3", "Goal4", "And More", "p234", "", "", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
-      {"s34646", "Goal5", "Second TO Last", "p234", "u9545", "u9545", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
-      {"s3564", "Goal6", "Final Subgoal", "p234", "u9545", "u76", "2019-09-30 09:05:45.000",
-          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},};
+	      {"GoalD", "Goal Name", "Goal Description", "ProjectID", "AssignorID", "AssigneeID",
+	          "start date", "end date", "Goal Status", "Goal Grade"},
+	      {"s2345", "Goal1", "Do Subgoal", "p93495", "u1", "u2", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s12", "Goal2", "Do Another Subgoal", "p93495", "u1", "u1", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "COMPLETED", "A-"},
+	      {"s24535", "Goal3", "And Another One", "p93495", "u1", "u6", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s95843", "Goal4", "And More", "p93495", "u1", "u2", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
+	      {"s3463", "Goal5", "Second TO Last", "p93495", "", "", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
+	      {"s59205", "Goal6", "Final Subgoal", "p93495", "u1", "u1", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s2003", "Goal1", "Do Subgoal", "p34852", "u100", "u100", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s24053", "Goal2", "Do Another Subgoal", "p34852", "u100", "u856", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "COMPLETED", "TBD"},
+	      {"s73253", "Goal3", "And Another One", "p34852", "u100", "u856", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s25253", "Goal4", "And More", "p34852", "u100", "u456", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s02850", "Goal5", "Second TO Last", "p34852", "u100", "u856", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
+	      {"s201", "Goal6", "Final Subgoal", "p34852", "u100", "u100", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s24642", "Goal1", "Do Subgoal", "p234", "u9545", "u5496", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
+	      {"s5039", "Goal2", "Do Another Subgoal", "p234", "u9545", "u5496", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s345", "Goal3", "And Another One", "p234", "u9545", "u9545", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "COMPLETED", "B+"},
+	      {"s3", "Goal4", "And More", "p234", "", "", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},
+	      {"s34646", "Goal5", "Second TO Last", "p234", "u9545", "u9545", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "IN PROGRESS", "TBD"},
+	      {"s3564", "Goal6", "Final Subgoal", "p234", "u9545", "u76", "2019-09-30 09:05:45.000",
+	          "2019-10-10 09:05:45.000", "NOT STARTED", "TBD"},};
 
   static List<String[]> GOALS = new ArrayList<String[]>(Arrays.asList(GOALS1));
 
@@ -259,7 +265,9 @@ public class sql_API_FAKE {
   }
   
   public static String projectsgetRemainingDate(String projectID) {
-    return "";
+	  String start = currentTime();
+	  String end = projectsgetEndDate(projectID);
+	  return remainingDate(start, end);
   }
 
   public static String projectsgetStatus(String projectID) {
@@ -282,7 +290,7 @@ public class sql_API_FAKE {
   }
 
   // TODO: Implement date
-  public static void projectscreate(String name, String description, String creatorID, String startdate,
+  public static void projectscreate(String name, String description, String creatorID,
       String enddate, String groupID) {
     String[] newProject = new String[9];
     int i = 0;
@@ -293,7 +301,7 @@ public class sql_API_FAKE {
     newProject[1] = name;
     newProject[2] = description;
     newProject[3] = creatorID;
-    newProject[4] = startdate;
+    newProject[4] = currentTime();
     newProject[5] = enddate;
     newProject[6] = groupID;
     newProject[7] = "NOT STARTED";
@@ -371,15 +379,10 @@ public class sql_API_FAKE {
     return get(GOALS, goalID, 7);
   }
 
-  /*
-   * TODO: We should refactor the way datetime is formatted:
-   * 
-   * old = "yyyy-MM-dd HH-mm-ss.SSS" new = "yyyy-MM-ddTHH-mm-ss.SSSZ"
-   * 
-   * This is the more common way and it makes parsing easier when using java's date libraries
-   */
   public static String goalsgetRemainingDate(String goalID) {
-    return "";
+	  String start = currentTime();
+	  String end = goalsgetEndDate(goalID);
+	  return remainingDate(start, end);
   }
 
   public static String goalsgetStatus(String goalID) {
@@ -395,7 +398,6 @@ public class sql_API_FAKE {
     return result;
   }
 
-  // TODO: Implement date
   public static void goalscreate(String goalID, String name, String description, String projectID, String assignorID,
       String assigneeID, String endDate) {
     String[] newGoal = new String[10];
@@ -409,7 +411,7 @@ public class sql_API_FAKE {
     newGoal[3] = projectID;
     newGoal[4] = assignorID;
     newGoal[5] = assigneeID;
-    newGoal[6] = "implement";
+    newGoal[6] = currentTime(); 
     newGoal[7] = endDate;
     newGoal[8] = "NOT STARTED";
     newGoal[9] = "TBD";
@@ -511,8 +513,6 @@ public class sql_API_FAKE {
 	  return generateID(COMMENTS, "c");
   }
 
-
-
   // ------------------------------------------------------------------------------------
 
   // -----Generic------------------------------------------------------------------------
@@ -552,11 +552,43 @@ public class sql_API_FAKE {
 		return idPrefix + i;
 	}
   
+  public static String currentTime() {
+	  DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	  Date date = new Date();
+	  return dateFormat.format(date);
+  }
+  
+  // Returns remaining date in the format "Days:Hours:Minutes:Seconds"
+  public static String remainingDate(String start, String end) {
+	  try {
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+		  LocalDateTime dateTime1= LocalDateTime.parse(start, formatter);
+		  LocalDateTime dateTime2= LocalDateTime.parse(end, formatter);
+		  
+		  long diffInSeconds = java.time.Duration.between(dateTime1, dateTime2).getSeconds();
+		  
+		  long days = diffInSeconds / (24 * 3600);
+		  
+		  diffInSeconds %= (24 * 3600);
+		  long hours = diffInSeconds / 3600;
+		  
+		  diffInSeconds %= 3600;
+		  long minutes = diffInSeconds / 60;
+		  
+		  diffInSeconds %= 60;
+		  long seconds = diffInSeconds;
+		  
+		  return String.format("%d:%d:%d:%d", days, hours, minutes, seconds);
+	  } catch (Exception e) {
+		  return "";
+	  }
+  }
+  
   
   // ------------------------------------------------------------------------------------
 
   public static void main(String args[]) {
-
+	  System.out.println(goalsgetRemainingDate("s12"));
   }
 
 }

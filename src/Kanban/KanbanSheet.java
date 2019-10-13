@@ -39,6 +39,14 @@ final class KanbanSheet implements Kanban {
 		stage.remove(goal);
 	}
 	
+	public void deleteGoal(Goal goal) {
+		Stage stage = stageForGoal(goal); 
+		if (stage == null) { 
+			throw new IllegalArgumentException();
+		}
+		stage.delete(goal);
+	}
+	
 	public void moveGoal(Goal goal, int change) {
 		Stage stage = stageForGoal(goal);
 		if (stage == null) { 
@@ -51,7 +59,7 @@ final class KanbanSheet implements Kanban {
 			throw new IllegalArgumentException();
 		}
 		String status = kanbanData.get(newStage).name();
-		stage.edit(goal, newStage, "", "", "", status, ""); // null instead of empty string?
+		stage.edit(goal, newStage, "", "", "", "", "", "", status, ""); // null instead of empty string?
 		kanbanData.get(oldStage).remove(goal);
 		kanbanData.get(newStage).add(goal);
 	}

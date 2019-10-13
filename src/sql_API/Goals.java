@@ -13,7 +13,7 @@ import sql_API.sql_API_FAKE;
  * TODO: Implement dates where needed and maybe clean up code with generics / template pattern?
  * 		 Also: for consistency between database and prototype decide whether to call it a "Goal" or a "Task"
  */
-public class Goals {
+final class Goals {
 	private static List<String[]> GOALS = sql_API_FAKE.GOALS;
  
 	private Goals() { }

@@ -234,43 +234,43 @@ public class sql_API_FAKE {
 
   // -----PROJECTS-----------------------------------------------------------------------
 
-  public String projectsgetName(String projectID) {
+  public static String projectsgetName(String projectID) {
     return get(PROJECTS, projectID, 1);
   }
 
-  public String projectsgetDescription(String projectID) {
+  public static String projectsgetDescription(String projectID) {
     return get(PROJECTS, projectID, 2);
   }
 
-  public String projectsgetCreatorID(String projectID) {
+  public static String projectsgetCreatorID(String projectID) {
     return get(PROJECTS, projectID, 3);
   }
 
-  public String projectsgetStartDate(String projectID) {
+  public static String projectsgetStartDate(String projectID) {
     return get(PROJECTS, projectID, 4);
   }
 
-  public String projectsgetEndDate(String projectID) {
+  public static String projectsgetEndDate(String projectID) {
     return get(PROJECTS, projectID, 5);
   }
 
-  public String projectsgetGroupID(String projectID) {
+  public static String projectsgetGroupID(String projectID) {
     return get(PROJECTS, projectID, 6);
   }
   
-  public String projectsgetRemainingDate(String projectID) {
+  public static String projectsgetRemainingDate(String projectID) {
     return "";
   }
 
-  public String projectsgetStatus(String projectID) {
+  public static String projectsgetStatus(String projectID) {
     return get(PROJECTS, projectID, 7);
   }
 
-  public String projectsgetGrade(String projectID) {
+  public static String projectsgetGrade(String projectID) {
     return get(PROJECTS, projectID, 8);
   }
 
-  public ArrayList<String[]> projectsgetProjectIDs(String ID) {
+  public static ArrayList<String[]> projectsgetProjectIDs(String ID) {
     ArrayList<String[]> projects = new ArrayList<String[]>();
     for (String[] project : PROJECTS) {
       if (projectsgetCreatorID(project[0]).equals(ID)
@@ -282,7 +282,7 @@ public class sql_API_FAKE {
   }
 
   // TODO: Implement date
-  public void projectscreate(String name, String description, String creatorID, String startdate,
+  public static void projectscreate(String name, String description, String creatorID, String startdate,
       String enddate, String groupID) {
     String[] newProject = new String[9];
     int i = 0;
@@ -302,7 +302,7 @@ public class sql_API_FAKE {
     PROJECTS.add(newProject);
   }
 
-  public void projectsedit(String projectID, String name, String description, String creatorID,
+  public static void projectsedit(String projectID, String name, String description, String creatorID,
       String startDate, String endDate, String groupID, String status, String grade) {
     String[] projectList = get(PROJECTS, projectID);
 
@@ -335,7 +335,7 @@ public class sql_API_FAKE {
     PROJECTS.add(projectList);
   }
 
-  public void projectsdelete(String projectID) {
+  public static void projectsdelete(String projectID) {
     PROJECTS.remove(get(PROJECTS, projectID));
   }
   
@@ -347,27 +347,27 @@ public class sql_API_FAKE {
 
   // -----GOALS--------------------------------------------------------------------------
 
-  public String goalsgetName(String goalID) {
+  public static String goalsgetName(String goalID) {
     return get(GOALS, goalID, 1);
   }
 
-  public String goalsgetDescription(String goalID) {
+  public static String goalsgetDescription(String goalID) {
     return get(GOALS, goalID, 2);
   }
 
-  public String goalsgetAssignor(String goalID) {
+  public static String goalsgetAssignor(String goalID) {
     return get(GOALS, goalID, 4);
   }
 
-  public String goalsgetAssignee(String goalID) {
+  public static String goalsgetAssignee(String goalID) {
     return get(GOALS, goalID, 5);
   }
 
-  public String goalsgetStartDate(String goalID) {
+  public static String goalsgetStartDate(String goalID) {
     return get(GOALS, goalID, 6);
   }
 
-  public String goalsgetEndDate(String goalID) {
+  public static String goalsgetEndDate(String goalID) {
     return get(GOALS, goalID, 7);
   }
 
@@ -378,32 +378,32 @@ public class sql_API_FAKE {
    * 
    * This is the more common way and it makes parsing easier when using java's date libraries
    */
-  public String goalsgetRemainingDate(String goalID) {
+  public static String goalsgetRemainingDate(String goalID) {
     return "";
   }
 
-  public String goalsgetStatus(String goalID) {
+  public static String goalsgetStatus(String goalID) {
     return get(GOALS, goalID, 8);
   }
 
-  public String goalsgetGrade(String goalID) {
+  public static String goalsgetGrade(String goalID) {
     return get(GOALS, goalID, 9);
   }
 
-  public String[] goalsgetGoalID(String goalID) {
+  public static String[] goalsgetGoalID(String goalID) {
     String[] result = { goalsgetAssignee(goalID), get(GOALS, goalID, 3) };
     return result;
   }
 
   // TODO: Implement date
-  public void goalscreate(String name, String description, String projectID, String assignorID,
+  public static void goalscreate(String goalID, String name, String description, String projectID, String assignorID,
       String assigneeID, String endDate) {
     String[] newGoal = new String[10];
-    int i = 0;
-    while (sql_API_FAKE.ifIDexists(GOALS, "s" + i)) {
-      i++;
-    }
-    newGoal[0] = "s" + i;
+    
+    /* Create before function call: need to do this for implementation reasons (See KanbanFactory)
+     * OR have this function return the goalID instead and generate internally. Either way works.
+     */
+    newGoal[0] = goalID;
     newGoal[1] = name;
     newGoal[2] = description;
     newGoal[3] = projectID;
@@ -417,10 +417,9 @@ public class sql_API_FAKE {
     GOALS.add(newGoal);
   }
 
-  public void goalsedit(String goalID, String name, String description, String projectID,
+  public static void goalsedit(String goalID, String name, String description, String projectID,
       String assignorID, String assigneeID, String endDate, String status, String grade) {
     String[] goalList = get(GOALS, goalID);
-
     if (!name.isEmpty()) {
       goalList[1] = name;
     }
@@ -447,7 +446,7 @@ public class sql_API_FAKE {
     }
   }
 
-  public void goalsdelete(String goalID) {
+  public static void goalsdelete(String goalID) {
     GOALS.remove(get(GOALS, goalID));
   }
   

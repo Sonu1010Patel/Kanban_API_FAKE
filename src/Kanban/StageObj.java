@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import sql_API.sql_API_FAKE;
 
 final class StageObj implements Stage {
 	private Map<Goal, Data> stageData;
@@ -47,12 +48,14 @@ final class StageObj implements Stage {
 		} 
 	}
 	
-	public void edit(Goal goal, int stage, String name, String description, String endDate, String status, String grade) {
+	public void edit(Goal goal, int stage, String name, String description, String projectID, String assignorID,
+			String assigneeID, String endDate, String status, String grade) {
 		DataObj data = (DataObj) stageData.get(goal);
 		if (data == null) {
 			throw new IllegalArgumentException();
 		}
-		sql_API.Goals.edit(goal.goalID(), name, description, endDate, status, grade);
+		sql_API_FAKE.goalsedit(goal.goalID(), name, description, projectID, assignorID, assigneeID, endDate, status,
+				grade);
 		stageData.put(goal, new DataObj(goal, stage));
 	}
 
@@ -70,7 +73,7 @@ final class StageObj implements Stage {
 			stageData.remove(goal);
 		} catch (Exception e) { }
 		try {
-			sql_API.Goals.delete(goal.goalID());
+			sql_API_FAKE.goalsdelete(goal.goalID());
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}
@@ -94,15 +97,15 @@ final class StageObj implements Stage {
 		DataObj(Goal goal, int currentStage) {
 			this.goal = goal;
 			this.currentStage = currentStage;
-			name 		  = sql_API.Goals.getName(goal.goalID());
-			description   = sql_API.Goals.getDescription(goal.goalID());
-			assignor 	  = sql_API.Goals.getAssignor(goal.goalID());
-			assignee 	  = sql_API.Goals.getAssignee(goal.goalID());
-			startDate 	  = sql_API.Goals.getStartDate(goal.goalID());
-			endDate 	  = sql_API.Goals.getEndDate(goal.goalID());
-			remainingDate = sql_API.Goals.getRemainingDate(goal.goalID());
-			status 		  = sql_API.Goals.getStatus(goal.goalID());
-			grade 		  = sql_API.Goals.getGrade(goal.goalID());
+			name 		  = sql_API_FAKE.goalsgetName(goal.goalID());
+			description   = sql_API_FAKE.goalsgetDescription(goal.goalID());
+			assignor 	  = sql_API_FAKE.goalsgetAssignor(goal.goalID());
+			assignee 	  = sql_API_FAKE.goalsgetAssignee(goal.goalID());
+			startDate 	  = sql_API_FAKE.goalsgetStartDate(goal.goalID());
+			endDate 	  = sql_API_FAKE.goalsgetEndDate(goal.goalID());
+			remainingDate = sql_API_FAKE.goalsgetRemainingDate(goal.goalID());
+			status 		  = sql_API_FAKE.goalsgetStatus(goal.goalID());
+			grade 		  = sql_API_FAKE.goalsgetGrade(goal.goalID());
 		}
 		
 		public Goal goal() {

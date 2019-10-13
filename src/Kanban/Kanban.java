@@ -19,9 +19,15 @@ public interface Kanban {
 	
 	/**
 	 * Remove a Goal from the Kanban sheet
-	 * @param name the name of the Goal object to be removed
+	 * @param goal goal to be removed
 	 */
 	public void removeGoal(Goal goal);
+	
+	/**
+	 * Delete a Goal from the Database and remove from the Kanban sheet
+	 * @param goal goal to be deleted
+	 */
+	public void deleteGoal(Goal goal);
 	
 	/** 
 	 * Move a Goal object between stages

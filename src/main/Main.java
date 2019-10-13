@@ -23,7 +23,7 @@ public class Main {
 		kanban.moveGoal(goal2, 1);
 		kanban.moveGoal(goal4, 2);
 		
-		//kanban.removeGoal(goal2);
+		kanban.deleteGoal(goal2);
 		
 		System.out.print(kanban.toString());
 	}

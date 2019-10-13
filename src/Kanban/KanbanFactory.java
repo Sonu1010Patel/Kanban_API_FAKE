@@ -1,5 +1,7 @@
 package Kanban;
 
+import sql_API.sql_API_FAKE;
+
 public class KanbanFactory {
 	
 	private KanbanFactory() { }
@@ -26,9 +28,11 @@ public class KanbanFactory {
 			throw new IllegalArgumentException();
 		}
 		
-		String goalID = sql_API.Goals.generateGoalID();
+		
+		
+		String goalID = sql_API_FAKE.generateGoalID();
 		Goal goal = new GoalObj(goalID, projectID);
-		sql_API.Goals.create(goalID, name, description, projectID, assignorID, assigneeID, endDate);
+		sql_API_FAKE.goalscreate(goalID, name, description, projectID, assignorID, assigneeID, endDate);
 		
 		return goal;
 	}

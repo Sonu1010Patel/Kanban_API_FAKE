@@ -40,7 +40,8 @@ public interface Stage {
 	/**
 	 * Edit data attributes for Goal. Pass the empty String for attributes you do not wish to change.
 	 */
-	public void edit(Goal goal, int stage, String name, String description, String endDate, String status, String grade);
+	public void edit(Goal goal, int stage, String name, String description, String projectID, String assignorID,
+			String assigneeID, String endDate, String status, String grade);
 	
 	/**
 	 * Remove Goal from Stage

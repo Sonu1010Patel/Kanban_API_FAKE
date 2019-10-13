@@ -44,9 +44,17 @@ public interface Stage {
 	
 	/**
 	 * Remove Goal from Stage
+	 * NOTE: This only removes the goal from the stage, it does NOT delete the goal
+	 * from the database. See delete(Goal goal).
 	 * @param goal the Goal to remove
 	 */
 	public void remove(Goal goal);
+	
+	/**
+	 * Remove Goal from Stage and delete it from the Database
+	 * @param goal the Goal to remove
+	 */
+	public void delete(Goal goal);
 	
 	/**
 	 * @return String representation of each Goal in the Stage

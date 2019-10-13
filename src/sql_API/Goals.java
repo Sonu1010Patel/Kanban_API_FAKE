@@ -36,14 +36,13 @@ public class Goals {
 		throw new NoSuchElementException();
 	}
 	
-	// Maybe not the best way but I need a way of actually creating / accessing a goalID outside of hardcoding
-		public static String generateGoalID() {
-			int i = 0;
-			while (sql_API_FAKE.ifIDexists(GOALS, "s" + i)) {
-				i++;
-			}
-			return "s" + i;
+	public static String generateGoalID() {
+		int i = 0;
+		while (sql_API_FAKE.ifIDexists(GOALS, "s" + i)) {
+			i++;
 		}
+		return "s" + i;
+	}
 
 	public static String getName(String goalID) {
 		return get(goalID, 1);
@@ -100,7 +99,6 @@ public class Goals {
 	 */
 	public static void create(String goalID, String name, String description, String projectID, String assignorID, 
 			String assigneeID, String endDate) {
-		
 		String[] newGoal = new String[10];
 		newGoal[0] = goalID;
 		newGoal[1] = name;
@@ -112,7 +110,6 @@ public class Goals {
 		newGoal[7] = endDate;
 		newGoal[8] = "NOT STARTED";
 		newGoal[9] = "TBD";
-
 		GOALS.add(newGoal);
 	}
  
@@ -134,7 +131,7 @@ public class Goals {
 			goalList[9] = grade;
 		}
 	} 
-
+	
 	public static void delete(String goalID) {
 		GOALS.remove(get(goalID));
 	}

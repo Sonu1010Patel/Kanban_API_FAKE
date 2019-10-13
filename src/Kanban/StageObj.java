@@ -59,7 +59,18 @@ final class StageObj implements Stage {
 	public void remove(Goal goal) {
 		try {
 			stageData.remove(goal);
-			//sql_API.Goals.delete(goal.goalID()); //TODO: add a way to delete without messing up everything
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	public void delete(Goal goal) {
+		try {
+			// Try to remove goal, it is possible that it has already been removed but not deleted.
+			stageData.remove(goal);
+		} catch (Exception e) { }
+		try {
+			sql_API.Goals.delete(goal.goalID());
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}
@@ -78,15 +89,7 @@ final class StageObj implements Stage {
 	private static final class DataObj implements Data {
 		Goal goal;
 		int currentStage;
-		String name;
-		String description;
-		String assignor;
-		String assignee;
-		String startDate;
-		String endDate;
-		String remainingDate;
-		String status;
-		String grade;
+		String name, description, assignor, assignee, startDate, endDate, remainingDate, status, grade;
 		
 		DataObj(Goal goal, int currentStage) {
 			this.goal = goal;
@@ -151,7 +154,7 @@ final class StageObj implements Stage {
 		}
 		
 		public String toString() {
-			return String.format("[ %s, %s, %s, %s, %s, %s, %s, %s, %s ]", name, description, assignor, assignee,
+			return String.format("%s: %s [%s, %s, %s, %s, %s, %s, %s]", name, description, assignor, assignee,
 					startDate, endDate, remainingDate, status, grade);
 		}
 	}

@@ -14,12 +14,11 @@ public class Main {
 		Goal goal3 = KanbanFactory.newGoal("Weekly log", "Turn in weekly log this monday", "p93495", "u1", "u2", "2019-10-10 09:05:45.000");
 		Goal goal4 = KanbanFactory.newGoal("Eat lunch", "Find something to eat for lunch", "p93495", "u1", "u2", "2019-10-10 09:05:45.000");
 		
-		
 		kanban.addGoal(goal1);
 		kanban.addGoal(goal2);
 		kanban.addGoal(goal3);
 		kanban.addGoal(goal4);
-		 
+		
 		kanban.moveGoal(goal1, 1); 
 		kanban.moveGoal(goal2, 1);
 		kanban.moveGoal(goal4, 2);

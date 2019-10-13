@@ -154,7 +154,7 @@ public class sql_API_FAKE {
 		newaccount[5]=accountStatus;
 		 
 		USERS.add(newaccount);
-	}
+	} 
 	
 	public static void usersEditUser(String userID, String firstname, String lastname, String email, String accountStatus) {  //NOT TESTED
 		String[] existing = {};

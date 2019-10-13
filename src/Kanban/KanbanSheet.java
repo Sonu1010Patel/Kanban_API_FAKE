@@ -51,11 +51,11 @@ final class KanbanSheet implements Kanban {
 			throw new IllegalArgumentException();
 		}
 		String status = kanbanData.get(newStage).name();
-		stage.edit(goal, newStage, "", "", "", status, "");
+		stage.edit(goal, newStage, "", "", "", status, ""); // null instead of empty string?
 		kanbanData.get(oldStage).remove(goal);
 		kanbanData.get(newStage).add(goal);
 	}
-	 
+	
 	public Stage stageForGoal(Goal goal) {
 		for (Stage stage: kanbanData) {
 			Iterator<Goal> i = stage.iterator();

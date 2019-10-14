@@ -105,6 +105,22 @@ public class sql_API_FAKE {
           {"c4235", "This is a comment", "s25253", "2019-10-05 09:05:45.000"}};
 
   static List<String[]> COMMENTS = new ArrayList<String[]>(Arrays.asList(COMMENTS1));
+  
+  static String[][] ROSTERS1 = 
+	  {{"RosterID", "Name", "TeacherID"},
+              {"ro4235", "CSC 394 - Software Projects ", "u34"}};
+  
+  static List<String[]> ROSTERS = new ArrayList<String[]>(Arrays.asList(ROSTERS1));
+  
+  static String[][] STUDENTROSTERS1 = 
+	  {{"UserID", "RosterID"},
+              {"u1", "ro4235"},
+              {"u100", "ro4235"},
+              {"u6", "ro4235"},
+              {"u5496", "ro4235"},
+              {"u76", "ro4235"}};
+  
+  static List<String[]> STUDENTROSTERS = new ArrayList<String[]>(Arrays.asList(STUDENTROSTERS1));
 
   // -----USERS--------------------------------------------------------------------------
 
@@ -514,6 +530,49 @@ public class sql_API_FAKE {
   }
 
   // ------------------------------------------------------------------------------------
+  
+  //-----ROSTERS-------------------------------------------------------------------------
+  
+  public static void rostercreate(String rosterID, String name, String teacherID) {
+	  String[] newroster = new String[3];
+	  newroster[0] = roasterID;
+	  newroster[1] = name;
+	  newroster[2] = teacherID;
+	  ROSTERS.add(newroster);
+  }
+  
+  public static void rosteredit(String rosterID, String name, String teacherID) {
+	  String[] newroster = new String[3];
+	  newroster[0] = get(ROSTERS, rosterID)[0];
+	  newroster[1] = name;
+	  newroster[2] = teacherID;
+	  rostersdelete(rosterID);
+	  ROSTERS.add(newroster);
+  }
+  
+  public static void rostersdelete(String rosterID) {
+	    ROSTERS.remove(get(ROSTERS, rosterID));
+  }
+  
+  //FN: return rosters based on teacherID
+  
+  //-------------------------------------------------------------------------------------
+  
+  //-----STUDENTROSTERS------------------------------------------------------------------
+  
+  public static void studentrostercreate(String studentID, String rosterID) {
+	  String[] studentroster = String[2];
+	  STUDENTROSTERS.add(studentroster);
+  }
+  
+  public static void studentrosterdelete(String studentID, String rosterID) {
+	  String[] studentroster = String[2];
+	  STUDENTROSTERS.remove(studentroster);
+  }
+  
+  //FN: return rosterID based on studentID.
+  
+  //-------------------------------------------------------------------------------------
 
   // -----Generic------------------------------------------------------------------------
   public static boolean ifIDexists(List<String[]> object, String id) {

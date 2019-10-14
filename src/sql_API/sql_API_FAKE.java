@@ -535,7 +535,7 @@ public class sql_API_FAKE {
   
   public static void rostercreate(String rosterID, String name, String teacherID) {
 	  String[] newroster = new String[3];
-	  newroster[0] = roasterID;
+	  newroster[0] = rosterID;
 	  newroster[1] = name;
 	  newroster[2] = teacherID;
 	  ROSTERS.add(newroster);
@@ -561,12 +561,12 @@ public class sql_API_FAKE {
   //-----STUDENTROSTERS------------------------------------------------------------------
   
   public static void studentrostercreate(String studentID, String rosterID) {
-	  String[] studentroster = String[2];
+	  String[] studentroster = new String[2];
 	  STUDENTROSTERS.add(studentroster);
   }
   
   public static void studentrosterdelete(String studentID, String rosterID) {
-	  String[] studentroster = String[2];
+	  String[] studentroster = new String[2];
 	  STUDENTROSTERS.remove(studentroster);
   }
   

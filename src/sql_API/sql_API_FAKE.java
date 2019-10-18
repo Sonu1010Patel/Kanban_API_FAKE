@@ -139,7 +139,15 @@ public class sql_API_FAKE {
   public static String usersGetAccountStatus(String userID) {
     return get(USERS, userID, 5);
   }
-
+  
+  public static String getUserID(String email) {
+	for (String[] listRow : USERS) {
+		if (listRow[3].contains(email)) {
+			return listRow[0];
+		}
+	}
+	throw new NoSuchElementException();
+  }
   public static void usersCreateUser(String firstname, String lastname, String email,
       String accountStatus) { // NOT TESTED
     String[] newaccount = new String[6];

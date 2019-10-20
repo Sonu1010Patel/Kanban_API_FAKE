@@ -46,7 +46,7 @@ public class Mothership extends sql_API_FAKE {
 	public String[] getPreviewGoalInfo(String goalID) {
 		String[] goalInfo = new String[4];
 		goalInfo[0] = sql_API_FAKE.goalsgetName(goalID); //Name
-		String description	= sql_API_FAKE.goalsgetDescription(projectID);
+		String description	= sql_API_FAKE.goalsgetDescription(goalID);
 		goalInfo[1] = description.substring(0, 150);  //150 char description -- length can be changed
 		goalInfo[2] = sql_API_FAKE.goalsgetAssignee(goalID); //Assignee
 		goalInfo[3] = sql_API_FAKE.goalsgetRemainingDate(goalID); //Remaining Date

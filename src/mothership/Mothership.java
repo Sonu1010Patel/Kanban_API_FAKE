@@ -42,4 +42,19 @@ public class Mothership extends sql_API_FAKE {
 		goalInfo[9] = sql_API_FAKE.goalsgetGrade(goalID); //Grade
 		return goalInfo;
 	}
+	
+	public String[] getDetailedProjectInfo(String projectID) {
+		String[] projectInfo = new String[9];
+		projectInfo[0] = projectID;
+		projectInfo[1] = sql_API_FAKE.projectsgetName(projectID); //Name
+		projectInfo[2] = sql_API_FAKE.projectsgetDescription(projectID); //Desciption
+		projectInfo[3] = sql_API_FAKE.projectsgetCreatorID(projectID); //Creator
+		projectInfo[4] = sql_API_FAKE.projectsgetStartDate(projectID); //Start Date
+		projectInfo[5] = sql_API_FAKE.projectsgetEndDate(projectID); //End Date
+		projectInfo[6] = sql_API_FAKE.projectsgetRemainingDate(projectID); //Remaining Date
+		projectInfo[7] = sql_API_FAKE.projectsgetGroupID(projectID); //Group ID
+		projectInfo[8] = sql_API_FAKE.projectsgetStatus(projectID); //Status
+		projectInfo[9] = sql_API_FAKE.projectsgetGrade(projectID); //Grade
+		return projectInfo;
+	}
 }

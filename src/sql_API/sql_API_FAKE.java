@@ -259,7 +259,25 @@ public class sql_API_FAKE {
     String[] usergroup = {userID, groupID};
     USERGROUPS.remove(usergroup);
   }
-
+  
+  public static String usergroupsGetGroup(String userID) {
+	  for (String[] userGroups: USERGROUPS) {
+	      if (userGroups[0] == userID) {
+	    	  return userGroups[1];
+	      }
+	    }
+	  throw new NoSuchElementException();
+  }
+  
+  public static List<String> getGroupMembers(String groupID){
+	  List<String> groupMembers = new ArrayList<String>();
+	  for(String[] userGroups: USERGROUPS) {
+		if(userGroups[1] == groupID) {
+			groupMembers.add(userGroups[0]);
+		}
+	  }
+	  return groupMembers;
+  }
   // ------------------------------------------------------------------------------------
 
   // -----PROJECTS-----------------------------------------------------------------------

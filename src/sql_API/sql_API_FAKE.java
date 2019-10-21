@@ -439,7 +439,27 @@ public class sql_API_FAKE {
     String[] result = { goalsgetAssignee(goalID), get(GOALS, goalID, 3) };
     return result;
   }
-
+  
+  public static List<String> getGoalsProject(String projectID){
+	  List<String> goalList = new ArrayList<String>();
+	  for(String[] goals : GOALS) {
+		  if(goals[3] == projectID) {
+			  goalList.add(goals[0]);
+		  }
+	  }
+	  return goalList;
+  }
+  
+  public static List<String> getGoalsUser(String userID){
+	  List<String> goalList = new ArrayList<String>();
+	  for(String[] goals : GOALS) {
+		  if(goals[5] == userID) {
+			  goalList.add(goals[0]);
+		  }
+	  }
+	  return goalList;
+  }
+  
   public static void goalscreate(String goalID, String name, String description, String projectID, String assignorID,
       String assigneeID, String endDate) {
     String[] newGoal = new String[10];

@@ -80,4 +80,16 @@ public class Mothership extends sql_API_FAKE {
 		projectInfo[5] = sql_API_FAKE.projectsgetStatus(projectID); //Status
 		return projectInfo;
 	}
+	
+	//TODO
+	public List<String> getGoalsDueIn(String userID, String time){
+		
+		return null;
+	}
+	
+	//TODO
+	public List<String> getGoalsByStatus(String userID, String status){
+		
+		return null;
+	}
 }

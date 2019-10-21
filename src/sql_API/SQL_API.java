@@ -1,7 +1,5 @@
 package sql_API;
 
-package sql_API;
-
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -410,6 +408,16 @@ public class SQL_API {
 			return "ERROR";
 		}
 	  }
+	  
+	  public static String goalsgetProjectID(String goalID) {
+		    String output = runquery("SELECT projectID FROM GOALS WHERE goalID = '" + goalID + "';");
+			if(!output.isEmpty()) {
+				return output.replace(", ", "");
+			}
+			else {
+				return "ERROR";
+			}
+		  }
 
 	  public static String goalsgetAssignor(String goalID) {
 		  String output = runquery("SELECT assignorID FROM GOALS WHERE goalID = '" + goalID + "';");
@@ -792,4 +800,6 @@ public class SQL_API {
 		  return output;
 	  }
 	  
+	  
+
 }

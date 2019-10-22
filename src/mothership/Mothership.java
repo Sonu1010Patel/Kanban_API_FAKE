@@ -12,6 +12,7 @@ public class Mothership extends sql_API_FAKE {
 		this.dataBase = db;
 	}
 	
+	//given a userID, create a list of all the groupmember info
 	public List<String[]> getGroupmemberInfo(String userID){
 		String groupName = sql_API_FAKE.usergroupsGetGroup(userID);
 		List<String> groupMembers = sql_API_FAKE.getGroupMembers(groupName);
@@ -28,6 +29,7 @@ public class Mothership extends sql_API_FAKE {
 		return groupInfo;
 	}
 	
+	//given a goalID, get the detailed goal info
 	public String[] getDetailedGoalInfo(String goalID) {
 		String[] goalInfo = new String[9];
 		goalInfo[0] = goalID;
@@ -43,6 +45,7 @@ public class Mothership extends sql_API_FAKE {
 		return goalInfo;
 	}
 	
+	//given a goalID, create a goal preview
 	public String[] getPreviewGoalInfo(String goalID) {
 		String[] goalInfo = new String[4];
 		goalInfo[0] = sql_API_FAKE.goalsgetName(goalID); //Name
@@ -54,6 +57,27 @@ public class Mothership extends sql_API_FAKE {
 		return goalInfo;
 	}
 	
+	//get all of the goal previews of goals assigned to userID
+	public List<String[]> getPreviewGoalInfoUser(String userID){
+		List<String> userGoals = getGoalsUser(userID);
+		List<String[]> answer = new ArrayList<String[]>();
+		for(String goalID: userGoals) {
+			answer.add(getPreviewGoalInfo(goalID));
+		}
+		return answer;
+	}
+	
+	//get all of the goal previews of goals under projectID
+	public List<String[]> getPreviewGoalInfoProject(String projectID){
+		List<String> projectGoals = getGoalsProject(projectID);
+		List<String[]> answer = new ArrayList<String[]>();
+		for(String goalID: projectGoals) {
+			answer.add(getPreviewGoalInfo(goalID));
+		}
+		return answer;
+	}
+		
+	//given the projectID, get detailed info on the project
 	public String[] getDetailedProjectInfo(String projectID) {
 		String[] projectInfo = new String[9];
 		projectInfo[0] = projectID;
@@ -69,6 +93,7 @@ public class Mothership extends sql_API_FAKE {
 		return projectInfo;
 	}
 	
+	//given the projectID, get project preview info
 	public String[] getPreviewProjectInfo(String projectID) {
 		String[] projectInfo = new String[5];
 		projectInfo[0] = sql_API_FAKE.projectsgetName(projectID); //Name
